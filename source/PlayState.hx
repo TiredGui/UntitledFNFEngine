@@ -166,6 +166,7 @@ class PlayState extends MusicBeatState
 	public var camFollowPos:FlxObject;
 	private static var prevCamFollow:FlxPoint;
 	private static var prevCamFollowPos:FlxObject;
+	public var camOrigin:Array<Float> = [0,0];
 
 	public var strumLineNotes:FlxTypedGroup<StrumNote>;
 	public var opponentStrums:FlxTypedGroup<StrumNote>;
@@ -296,6 +297,9 @@ class PlayState extends MusicBeatState
 	var detailsText:String = "";
 	var detailsPausedText:String = "";
 	#end
+
+	public var mustHitSection:Bool = false;
+	public var gfSection:Bool = false;
 
 	//Achievement shit
 	var keysPressed:Array<Bool> = [];
@@ -2273,6 +2277,7 @@ class PlayState extends MusicBeatState
 			});
 		}
 		callOnLuas('onUpdateScore', [miss]);
+		scoreTxt.color = FlxColor.fromRGB(dad.healthColorArray[0],dad.healthColorArray[1],dad.healthColorArray[2]);
 	}
 
 	public function setSongTime(time:Float)
@@ -3783,16 +3788,16 @@ class PlayState extends MusicBeatState
 	{
 		if(isDad)
 		{
-			camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-			camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
-			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
+			camOrigin = [dad.getMidpoint().x + 150, dad.getMidpoint().y - 100]; //changed this so that in the unlikley event that a note being hit while the camera is being moved makes the camorigin based off that offset?!?!?! idk if that made sense but yeah
+			camOrigin[0] -= dad.cameraPosition[0] + opponentCameraOffset[0];
+			camOrigin[1] += dad.cameraPosition[1] + opponentCameraOffset[1];
 			tweenCamIn();
 		}
 		else
 		{
-			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-			camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
-			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
+			camOrigin = [boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100];
+			camOrigin[0] -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
+			camOrigin[1] += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
 
 			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
 			{
@@ -3804,6 +3809,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 		}
+		camFollow.set(camOrigin[0],camOrigin[1]);
 	}
 
 	function tweenCamIn() {
@@ -4103,7 +4109,7 @@ class PlayState extends MusicBeatState
 		}
 
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
-		rating.cameras = [camHUD];
+		rating.cameras = [camGame];
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
 		rating.y -= 60;
@@ -4181,7 +4187,7 @@ class PlayState extends MusicBeatState
 		for (i in seperatedScore)
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
-			numScore.cameras = [camHUD];
+			numScore.cameras = [camGame];
 			numScore.screenCenter();
 			numScore.x = coolText.x + (43 * daLoop) - 90;
 			numScore.y += 80;
@@ -4568,6 +4574,20 @@ class PlayState extends MusicBeatState
 			{
 				char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
+
+				if(!mustHitSection) { //the actual camera moving
+						switch(note.noteData) //i dont wanna use my brain to make a super cool solution!!!
+						{
+							case 0:
+								camFollow.set(camOrigin[0] - char.cameraMove, camOrigin[1]);
+							case 1:
+								camFollow.set(camOrigin[0], camOrigin[1] + char.cameraMove);
+							case 2:
+								camFollow.set(camOrigin[0], camOrigin[1] - char.cameraMove);
+							case 3:
+								camFollow.set(camOrigin[0] + char.cameraMove, camOrigin[1]);
+						}
+				}
 			}
 		}
 
@@ -4667,6 +4687,25 @@ class PlayState extends MusicBeatState
 						gf.heyTimer = 0.6;
 					}
 				}
+				else
+					{
+						var char:Character = note.gfNote ? gf : boyfriend;
+	
+						if(mustHitSection)
+						{ //the actual camera moving AGAIN
+							switch(note.noteData) //i dont wanna use my brain to make a super cool solution!!!
+							{
+								case 0:
+									camFollow.set(camOrigin[0] - char.cameraMove, camOrigin[1]);
+								case 1:
+									camFollow.set(camOrigin[0], camOrigin[1] + char.cameraMove);
+								case 2:
+									camFollow.set(camOrigin[0], camOrigin[1] - char.cameraMove);
+								case 3:
+									camFollow.set(camOrigin[0] + char.cameraMove, camOrigin[1]);
+							}
+						}
+					}
 			}
 
 			if(cpuControlled) {
@@ -4960,6 +4999,7 @@ class PlayState extends MusicBeatState
 	var lightningOffset:Int = 8;
 
 	var lastBeatHit:Int = -1;
+	var idleAnims:Array<String> = ['idle', 'danceLeft', 'danceRight', 'hey']; //animations that can set the camera back to normal
 
 	override function beatHit()
 	{
@@ -4984,14 +5024,26 @@ class PlayState extends MusicBeatState
 		if (gf != null && curBeat % Math.round(gfSpeed * gf.danceEveryNumBeats) == 0 && gf.animation.curAnim != null && !gf.animation.curAnim.name.startsWith("sing") && !gf.stunned)
 		{
 			gf.dance();
+			for(i in 0...idleAnims.length) { //resets camera back to normal if is idling
+				if(gfSection && gf.animation.curAnim.name.startsWith(idleAnims[i]))
+					camFollow.set(camOrigin[0], camOrigin[1]);
+			}
 		}
 		if (curBeat % boyfriend.danceEveryNumBeats == 0 && boyfriend.animation.curAnim != null && !boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.stunned)
 		{
 			boyfriend.dance();
+			for(i in 0...idleAnims.length) {
+				if(mustHitSection && boyfriend.animation.curAnim.name.startsWith(idleAnims[i]))
+					camFollow.set(camOrigin[0], camOrigin[1]);
+			}
 		}
 		if (curBeat % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
 		{
 			dad.dance();
+			for(i in 0...idleAnims.length) {
+				if(!mustHitSection && dad.animation.curAnim.name.startsWith(idleAnims[i]))
+					camFollow.set(camOrigin[0], camOrigin[1]);
+			}
 		}
 
 		switch (curStage)
@@ -5081,6 +5133,8 @@ class PlayState extends MusicBeatState
 			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
 			setOnLuas('gfSection', SONG.notes[curSection].gfSection);
+			mustHitSection = SONG.notes[Math.floor(curStep / 16)].mustHitSection;
+			gfSection = SONG.notes[Math.floor(curStep / 16)].gfSection;
 		}
 		
 		setOnLuas('curSection', curSection);
