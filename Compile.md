@@ -1,3 +1,4 @@
+# How to compile
 ## Installation:
 ### Automatic
 Just run `art/setup.bat`\
@@ -28,12 +29,13 @@ haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
 haxelib install hxCodec 2.5.1
 ```
-To install all libraries.
 
 Install visual studio with the components,
 * Windows 10 SDK (10.0.19041.0)
-* MSVC v143 - VS 20(19 or 22) x64/x86 build tools
+* MSVC v143 - VS 20(19 or 22) x64/x86 build tools\
 I do not know how you compile to Mac/Linux though.
 
 ### Compiling
-This is as easy as `lime test Windows` (windows)
+For Windows run `lime test windows`\
+For Html run  `lime test html`\
+To compile to debug add `-debug` to the end of the command
