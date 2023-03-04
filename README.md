@@ -1,12 +1,9 @@
-# Friday Night Funkin' - Psych Engine
+# Friday Night Funkin' - Untitled Engine
 Based on [Psych](https://github.com/ShadowMario/FNF-PsychEngine)
 
 ## Installation:
-You must have [the most up-to-date version of Haxe](https://haxe.org/download/), seriously, stop using 4.1.5, it misses some stuff.
-
-open up a Command Prompt/PowerShell or Terminal, type `haxelib install hmm`
-
-after it finishes, simply type `haxelib run hmm install` in order to install all the needed libraries for *Psych Engine!*
+Just run `art/setup.bat`\
+Might make a linux/bash version
 
 ## Customization:
 
@@ -19,20 +16,24 @@ to start you off, disabling Videos should be simple, simply Delete the line `"VI
 same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, this and other customization options are all available within the `Project.xml` file
 
 ## Credits:
-* Shadow Mario - Programmer
+### Psych Engine
+* Shadow Mario - Psych Programmer
 * RiverOaken - Artist
-* Yoshubs - Assistant Programmer
+* Yoshubs - Psych Assistant Programmer
+
+### Untitled engine
+* TiredGui - Main Programmer
 
 ### Special Thanks
-* bbpanzu - Ex-Programmer
-* Yoshubs - New Input System
-* SqirraRNG - Crash Handler and Base code for Chart Editor's Waveform
-* KadeDev - Fixed some cool stuff on Chart Editor and other PRs
-* iFlicky - Composer of Psync and Tea Time, also made the Dialogue Sounds
-* PolybiusProxy - .MP4 Video Loader Library (hxCodec)
-* Keoiki - Note Splash Animations
-* Smokey - Sprite Atlas Support
-* Nebula the Zorua - LUA JIT Fork and some Lua reworks
+* bbpanzu - Ex-Programmer (Psych)
+* Yoshubs - New Input System (Psych)
+* SqirraRNG - Crash Handler and Base code for Chart Editor's Waveform (Psych)
+* KadeDev - Fixed some cool stuff on Chart Editor and other PRs (Psych)
+* iFlicky - Composer of Psync and Tea Time, also made the Dialogue Sounds (Psych)
+* PolybiusProxy - .MP4 Video Loader Library (hxCodec) (Psych)
+* Keoiki - Note Splash Animations (Psych)
+* Smokey - Sprite Atlas Support (Psych)
+* Nebula the Zorua - LUA JIT Fork and some Lua reworks (Psych)
 _____________________________________
 
 # Features
