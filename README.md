@@ -1,9 +1,7 @@
 # Friday Night Funkin' - Untitled Engine
-Based on [Psych](https://github.com/ShadowMario/FNF-PsychEngine)
-
-## Installation:
-Just run `art/setup.bat`\
-Might make a linux/bash version
+Based on [Psych](https://github.com/ShadowMario/FNF-PsychEngine)\
+Made to improve on psych\
+~~Stole ideas~~ Got inspired from [ImpostorV4](https://vsimpostor.com/)
 
 ## Customization:
 
@@ -78,3 +76,5 @@ _____________________________________
 * Some stuff based on Week 7's changes has been put in (Background colors on Freeplay, Note splashes)
 * You can reset your Score on Freeplay/Story Mode by pressing Reset button.
 * You can listen to a song or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Space.
+* Camera moveing on note press
+* Cool score color
