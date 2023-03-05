@@ -219,7 +219,7 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
-	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
+	var dialogue:Array<String> = ['blah blah blah', 'coolswag', 'Is that a jojo reference!!!!!!!!'];
 	var dialogueJson:DialogueFile = null;
 
 	var dadbattleBlack:BGSprite;
@@ -4575,7 +4575,7 @@ class PlayState extends MusicBeatState
 				char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
 
-				if(!mustHitSection) { //the actual camera moving
+				if(!mustHitSection && (ClientPrefs.moveCam == true)) { //the actual camera moving (Now with settings)
 						switch(note.noteData) //i dont wanna use my brain to make a super cool solution!!!
 						{
 							case 0:
@@ -4691,7 +4691,7 @@ class PlayState extends MusicBeatState
 					{
 						var char:Character = note.gfNote ? gf : boyfriend;
 	
-						if(mustHitSection)
+						if(mustHitSection && (ClientPrefs.moveCam == true))
 						{ //the actual camera moving AGAIN
 							switch(note.noteData) //i dont wanna use my brain to make a super cool solution!!!
 							{
