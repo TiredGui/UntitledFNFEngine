@@ -14,6 +14,7 @@ to start you off, disabling Videos should be simple, simply Delete the line `"VI
 same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, this and other customization options are all available within the `Project.xml` file
 
 ## Credits:
+PLEASE IF YOU USE THIS ENGINE FOR A MOD/FORK PLEASE CREDIT (＃°Д°)
 
 ### Psych Engine
 * Shadow Mario - Psych Programmer
@@ -21,7 +22,7 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 * Yoshubs - Psych Assistant Programmer
 
 ### Untitled engine
-* TiredGui - Main Programmer
+* TiredGui - Main/Only Programmer
 
 ### Special Thanks
 * bbpanzu - Ex-Programmer (Psych)
@@ -78,3 +79,4 @@ _____________________________________
 * You can listen to a song or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Space.
 * Camera moveing on note press
 * Cool score color
+* And more

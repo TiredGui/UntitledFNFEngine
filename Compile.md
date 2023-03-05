@@ -1,7 +1,7 @@
 # How to compile
 ## Installation:
 ### Automatic
-Just run `art/setup.bat`\
+Just run `art/setup.bat` (Using regular cmd)\
 Make sure to check this(and other batch scripts you run) for weird commands (Stay safe :D)\
 Might make a linux/bash version
 

@@ -41,6 +41,14 @@ class UntitledEnSettingsSubState extends BaseOptionsMenu
 			'bool', //Variable type
 			true); //Default value
 		addOption(option);
+		
+		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
+		var option:Option = new Option('Judgement counter', //Name
+			'If checked shows a Judgement Counter.', //Description
+			'judgementCounter', //Save data variable name
+			'bool', //Variable type
+			true); //Default value
+		addOption(option);
 
 		super();
 	}
