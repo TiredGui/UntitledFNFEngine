@@ -5133,8 +5133,8 @@ class PlayState extends MusicBeatState
 			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
 			setOnLuas('gfSection', SONG.notes[curSection].gfSection);
-			mustHitSection = SONG.notes[Math.floor(curStep / 16)].mustHitSection;
-			gfSection = SONG.notes[Math.floor(curStep / 16)].gfSection;
+			mustHitSection = SONG.notes[curSection].mustHitSection;
+			gfSection = SONG.notes[curSection].gfSection;
 		}
 		
 		setOnLuas('curSection', curSection);
