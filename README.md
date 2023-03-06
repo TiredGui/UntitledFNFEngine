@@ -1,7 +1,7 @@
 # Friday Night Funkin' - Untitled Engine
 Based on [Psych](https://github.com/ShadowMario/FNF-PsychEngine)\
 Made to improve on psych\
-~~Stole ideas~~ Got inspired from [ImpostorV4](https://vsimpostor.com/)
+~~Stole ideas~~ Got inspired from [ImpostorV4](https://vsimpostor.com/ "Offical website") and [Forever Engine](a "No link")
 
 ## Customization:
 
