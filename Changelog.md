@@ -7,3 +7,4 @@ Changed rating camera
 # V0.6.5 POLISH
 Added options substate + to pause menu
 Judgement counter
+New main menu
