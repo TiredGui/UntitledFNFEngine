@@ -131,7 +131,7 @@ class TitleState extends MusicBeatState
 
 		ClientPrefs.loadPrefs();
 
-		#if CHECK_FOR_UPDATES
+		//#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates && !closedState) {
 			trace('checking for update');
 			var http = new haxe.Http("https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt");
@@ -153,7 +153,7 @@ class TitleState extends MusicBeatState
 
 			http.request();
 		}
-		#end
+		//#end
 
 		Highscore.load();
 
