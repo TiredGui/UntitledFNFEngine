@@ -50,6 +50,13 @@ class UntitledEnSettingsSubState extends BaseOptionsMenu
 			true); //Default value
 		addOption(option);
 
+		var option:Option = new Option('Fixed judgements', //Name
+			'Fixes judgements to the camera, making them easier to read', //Description
+			'fixedJudgements', //Save data variable name
+			'bool', //Variable type
+			false); //Default value
+		addOption(option);
+
 		super();
 	}
 

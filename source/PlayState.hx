@@ -4122,7 +4122,8 @@ class PlayState extends MusicBeatState
 		}
 
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
-		rating.cameras = [camGame];
+		if (!ClientPrefs.fixedJudgements) {rating.cameras = [camGame];}
+		else {rating.cameras = [camHUD];}
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
 		rating.y -= 60;
@@ -4200,7 +4201,8 @@ class PlayState extends MusicBeatState
 		for (i in seperatedScore)
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
-			numScore.cameras = [camGame];
+			if (!ClientPrefs.fixedJudgements) {numScore.cameras = [camGame];}
+			else {numScore.cameras = [camHUD];}
 			numScore.screenCenter();
 			numScore.x = coolText.x + (43 * daLoop) - 90;
 			numScore.y += 80;
