@@ -10,6 +10,7 @@ class ClientPrefs {
 	public static var moveCam:Bool = true;
 	public static var judgementCounter:Bool = true;
 	public static var fixedJudgements:Bool = false;
+
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var opponentStrums:Bool = true;
@@ -144,6 +145,18 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		// New options
+		if(FlxG.save.data.moveCam != null) {
+			moveCam = FlxG.save.data.moveCam;
+		}
+		if(FlxG.save.data.judgementCounter != null) {
+			judgementCounter = FlxG.save.data.judgementCounter;
+		}
+		if(FlxG.save.data.fixedJudgements != null) {
+			fixedJudgements = FlxG.save.data.fixedJudgements;
+		}
+
+		//Base psych ptions
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
 		}
