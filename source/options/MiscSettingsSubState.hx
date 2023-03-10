@@ -27,12 +27,12 @@ import Controls;
 
 using StringTools;
 
-class UntitledEnSettingsSubState extends BaseOptionsMenu
+class MiscSettingsSubState extends BaseOptionsMenu
 {
 	public function new()
 	{
-		title = 'Engine Settings';
-		rpcTitle = 'Engine Settings Menu'; //for Discord Rich Presence
+		title = 'Miscellaneous Settings';
+		rpcTitle = 'Misc Settings Menu'; //for Discord Rich Presence
 
 		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Move camera on note hit', //Name
@@ -51,7 +51,7 @@ class UntitledEnSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Fixed judgements', //Name
-			'Fixes judgements to the camera, making them easier to read', //Description
+			'Fixes judgements to the HUD, making them easier to read', //Description
 			'fixedJudgements', //Save data variable name
 			'bool', //Variable type
 			false); //Default value
