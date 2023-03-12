@@ -8,3 +8,6 @@ Changed rating camera
 Added options substate + to pause menu
 Judgement counter
 New main menu
+
+# V0.6.6 NEW STUFF
+Added icon bop
